@@ -7,8 +7,6 @@ The code was presented on a talk on [Stackconf conference 2023](https://docs.goo
 
 ![Alt text](https://github.com/memphisdev/memphis-dev-academy/assets/74717402/f8c2ec11-e4c9-4417-b4c8-3f991af5235a/)
 
-![Alt text](https://github-production-user-asset-6210df.s3.amazonaws.com/74717402/266946664-06cd1401-fcfc-4ac5-ac5f-a59598f7f4e3.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20230912%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230912T204219Z&X-Amz-Expires=300&X-Amz-Signature=d15055bc95d47e56ac581aeef8d596617560f1b113160f1b7654d6470934738c&X-Amz-SignedHeaders=host&actor_id=74717402&key_id=0&repo_id=530804070)
-
 ## Installation
 
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install requirements.
@@ -21,14 +19,24 @@ pip3 install -r requirements.txt
 
 Update credentials in the required fields.
 
+### Collector
+
 To run the collector head to "collector" directory and run
 
 ```bash
 python3 collector.py
 ```
 
-To run the analyzer head to "analyzer" directory and run
+### Analyzer
+
+To run the pre-processing head to "analyzer/pre_processing" directory and run
 
 ```bash
-python3 analyzer.py
+python3 main.py
+```
+
+To run the LDA model head to "analyzer/lda" directory and run
+
+```bash
+python3 main.py
 ```
