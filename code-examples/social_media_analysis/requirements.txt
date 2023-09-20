@@ -1,0 +1,17 @@
+
+asyncio
+demoji
+gensim
+google-api-core
+google-auth
+google-cloud
+google-cloud-bigquery
+google-cloud-core
+google-crc32
+google-resumable-media
+memphis-py
+pandas
+pyarrow
+regex
+requests
+nltk
