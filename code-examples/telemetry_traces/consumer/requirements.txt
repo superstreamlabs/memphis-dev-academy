@@ -1,0 +1,7 @@
+requests
+urllib3==1.26.15
+asyncio
+memphis-py
+google-cloud-bigquery[bqstorage,pandas]
+pandas
+pytz

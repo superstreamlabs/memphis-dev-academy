@@ -1,0 +1,35 @@
+{
+  "info": {
+    "_postman_id": "61aec7b4-6cbf-4926-b60c-c101be89de22",
+    "name": "Traces Event Trigger Code Examples",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "19290671",
+    "_collection_link": "https://memphis-dev-team.postman.co/workspace/Memphis-Devs~c0148c46-7892-469b-9278-061da8b9b8cd/collection/19290671-61aec7b4-6cbf-4926-b60c-c101be89de22?action=share&source=collection_link&creator=19290671"
+  },
+  "item": [
+    {
+      "name": "Trace trigger",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"event\": \"installation\",\n    // event: \"update\",\n    // event: \"uninstall\",\n    // event: \"crash\",\n    // event: \"error\",\n    // event: \"navigation\",\n    // event: \"view\",\n    // event: \"click\",\n    // event: \"swipe\",\n    // event: \"custom\",\n    // \"timestamp\": Date.now(),\n    \"ip\": \"147.235.198.23\" // IP address of the device - create a function to get this\n    // ... other fields that you want to send\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/add-trace",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["add-trace"]
+        }
+      },
+      "response": []
+    }
+  ]
+}
