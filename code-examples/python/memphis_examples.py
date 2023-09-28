@@ -347,11 +347,171 @@ async def memphis_station_producer():
 
 ### Memphis.consumer
 
+# Waiting on slack response to do this one
+
 ### Memphis.produce
+
+async def memphis_simple_produce():
+  try:
+    memphis = Memphis()
+
+    await memphis.connect(
+            host = "localhost",
+            username = "root", 
+            password = "memphis",
+    )
+    
+    await Memphis.produce(
+        station_name = "my_station",
+        producer_name = "new_producer",
+        message = {'some':'message'}
+    )
+
+  except Exception as e:
+    print(e)
+  finally:
+    await memphis.close()
+    
+
+async def memphis_async_produce():
+  try:
+    memphis = Memphis()
+
+    await memphis.connect(
+            host = "localhost",
+            username = "root", 
+            password = "memphis",
+    )
+    
+    await Memphis.produce(
+        station_name = "my_station",
+        producer_name = "new_producer",
+        message = {'some':'message'},
+        ack_wait_sec = 30,
+        async_produce = True
+    )
+
+  except Exception as e:
+    print(e)
+  finally:
+    await memphis.close()
+
+async def memphis_produce_idempotency():
+  try:
+    memphis = Memphis()
+
+    await memphis.connect(
+            host = "localhost",
+            username = "root", 
+            password = "memphis",
+    )
+    
+    await Memphis.produce(
+        station_name = "my_station",
+        producer_name = "new_producer",
+        message = {'some':'message'},
+        msg_id = '42'
+
+    )
+
+  except Exception as e:
+    print(e)
+  finally:
+    await memphis.close()
+
+async def memphis_produce_with_headers():
+  try:
+    memphis = Memphis()
+
+    await memphis.connect(
+            host = "localhost",
+            username = "root", 
+            password = "memphis",
+    )
+    
+    await Memphis.produce(
+        station_name = "my_station",
+        producer_name = "new_producer",
+        message = {'some':'message'},
+        headers = {
+            'trace_header': 'track_me_123'
+        }
+    )
+
+  except Exception as e:
+    print(e)
+  finally:
+    await memphis.close()
+
+async def memphis_produce_with_partition_key():
+  try:
+    memphis = Memphis()
+
+    await memphis.connect(
+            host = "localhost",
+            username = "root", 
+            password = "memphis",
+    )
+    
+    await Memphis.produce(
+        station_name = "my_station",
+        producer_name = "new_producer",
+        message = {'some':'message'},
+        producer_partition_key = "2nd_partition"
+
+    )
+
+  except Exception as e:
+    print(e)
+  finally:
+    await memphis.close()
 
 ### Memphis.fetch_message
 
+async def memphis_fetch_messages():
+  try:
+    memphis = Memphis()
+
+    await memphis.connect(
+            host = "localhost",
+            username = "root", 
+            password = "memphis",
+    )
+    
+    await Memphis.fetch_messages(
+        station_name = "my_station",
+        consumer_name = "new_consumer",
+        batch_size = 5,
+        start_consume_from_sequence = 4
+    )
+
+  except Exception as e:
+    print(e)
+  finally:
+    await memphis.close()
+
 ### Memphis.create_schema
+
+async def memphis_fetch_messages():
+  try:
+    memphis = Memphis()
+
+    await memphis.connect(
+            host = "localhost",
+            username = "root", 
+            password = "memphis",
+    )
+    
+    await memphis.create_schema(
+        schema_name = "my_new_schema",
+        schema_type = "json",
+        schema_path = "~/schemas/my_new_json_schmea.json"
+    )
+    
+  except Exception as e:
+    print(e)
+  finally:
+    await memphis.close()
 
 # if __name__ == '__main__':
 #   asyncio.run( )
