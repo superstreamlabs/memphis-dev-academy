@@ -48,10 +48,10 @@ The connect function in the Memphis class allows for the connection to Memphis. 
 What arguments are used with the Memphis.connect function change depending on the type of connection being made. A standard password-based connection would look like this (using the defualt root memphis login with Memphis open-source):
 
 ```typescript
-async function connectDemo(){
+async function connectPassword(){
     let memphisConnection;
     try{
-        memmphisConnection = await memphis.connect({
+        memphisConnection = await memphis.connect({
                 host: "localhost",
                 username: "root", // (root/application type user)
                 password: "memphis" 
@@ -65,13 +65,13 @@ async function connectDemo(){
 A JWT, token-based connection would look like this:
 
 ```typescript
-async function connectDemo(){
+async function connectToken(){
     let memphisConnection;
     try{
-        memmphisConnection = await memphis.connect({
+        memphisConnection = await memphis.connect({
                 host: "localhost",
                 username: "root", // (root/application type user)
-                connectionToken: "token 
+                connectionToken: "token"
                 });
     }catch(exception){
         // Handle exception
@@ -84,10 +84,10 @@ Memphis needs to be configured to use token based connection. See the [docs](htt
 A TLS based connection would look like this:
 
 ```typescript
-async function connectDemo(){
+async function connectTLS(){
     let memphisConnection;
     try{
-        memmphisConnection = await memphis.connect({
+        memphisConnection = await memphis.connect({
                 host: "localhost",
                 username: "root", // (root/application type user)
                 keyFile: "~/tls_file_path.key",
@@ -139,10 +139,11 @@ The station function is used to create a station. Using the different arguemnts,
 A minimal example, using all default values would simply create a station with the given name:
 
 ```typescript
-async function connectDemo(){
+async function stationDefault(){
     let memphisConnection;
     try{
-        await memphis.station({
+        memphisConnection = await memphis.connect({...});
+        await memphisConnection.station({
             name: "myStation"
         });
     }catch(exception){
@@ -158,12 +159,13 @@ The unit of the rentention value will vary depending on the RetentionType. The [
 Here is an example of a station which will only hold up to 10 messages:
 
 ```typescript
-async function connectDemo(){
+async function stationRetentionType(){
     let memphisConnection;
     try{
-        await memphis.station({
+        memphisConnection = await memphis.connect({...});
+        await memphisConnection.station({
             name: "myStation",
-            retentionType: retentionTypes.MESSAGES
+            retentionType: memphis.retentionTypes.MESSAGES
         });
     }catch(exception){
         // Handle exception
@@ -176,12 +178,13 @@ Memphis stations can either store Messages on disk or in memory. A comparison of
 Here is an example of how to create a station that uses Memory as its storage type:
 
 ```typescript
-async function connectDemo(){
+async function stationMemoryStorage(){
     let memphisConnection;
     try{
-        await memphis.station({
+        memphisConnection = await memphis.connect({...});
+        await memphisConnection.station({
             name: "myStation",
-            storeageType: storageTypes.MEMORY
+            storageType: memphis.storageTypes.MEMORY
         });
     }catch(exception){
         // Handle exception
@@ -194,10 +197,11 @@ In order to make a station more redundant, replicas can be used. Read more about
 Here is an example of creating a station with 3 replicas:
 
 ```typescript
-async function connectDemo(){
+async function stationWithReplicas(){
     let memphisConnection;
     try{
-        await memphis.station({
+        memphisConnection = await memphis.connect({...});
+        await memphisConnection.station({
             name: "myStation",
             replicas: 3
         });
@@ -212,12 +216,13 @@ Idempotency defines how Memphis will prevent duplicate messages from being store
 Here is an example of changing the idempotency window to 3 seconds:
 
 ```typescript
-async function connectDemo(){
+async function stationIdempotency(){
     let memphisConnection;
     try{
-        await memphis.station({
+        memphisConnection = await memphis.connect({...});
+        await memphisConnection.station({
             name: "myStation",
-            idempotencyWindowsMs: 180000
+            idempotencyWindowMs: 180000
         });
     }catch(exception){
         // Handle exception
@@ -228,12 +233,13 @@ async function connectDemo(){
 The schema name is used to set a schema to be enforced by the station. The default value of "" ensures that no schema is enforced. Here is an example of changing the schema to a defined schema in schemaverse called "sensorLogs":
 
 ```typescript
-async function connectDemo(){
+async function stationWithSchema(){
     let memphisConnection;
     try{
-        await memphis.station({
+        memphisConnection = await memphis.connect({...});
+        await memphisConnection.station({
             name: "myStation",
-            schema: "sensorLogs"
+            schemaName: "sensorLogs"
         });
     }catch(exception){
         // Handle exception
@@ -246,10 +252,11 @@ There are two parameters for sending messages to the [dead-letter station(DLS)](
 Here is an example of sending poison messages to the DLS but not messages which fail to conform to the given schema.
 
 ```typescript
-async function connectDemo(){
+async function stationWithDeadLetter(){
     let memphisConnection;
     try{
-        await memphis.station({
+        memphisConnection = await memphis.connect({...});
+        await memphisConnection.station({
             name: "myStation",
             sendPoisonMsgToDls: true,
             sendSchemaFailedMsgToDls: false
@@ -263,10 +270,11 @@ async function connectDemo(){
 When either of the DLS flags are set to True, a station can also be set to handle these events. To set a station as the station to where schema failed or poison messages will be set to, use the DlsStation parameter:
 
 ```typescript
-async function connectDemo(){
+async function stationWithDeadLetterToStation(){
     let memphisConnection;
     try{
-        await memphis.station({
+        memphisConnection = await memphis.connect({...});
+        await memphisConnection.station({
             name: "myStation",
             sendPoisonMsgToDls: true,
             sendSchemaFailedMsgToDls: false,
@@ -281,10 +289,11 @@ async function connectDemo(){
 When the retention value is met, Memphis by default will delete old messages. If tiered storage is setup, Memphis can instead move messages to tier 2 storage. Read more about tiered storage [here](https://docs.memphis.dev/memphis/memphis-broker/concepts/storage-and-redundancy#storage-tiering). Enable this setting with the respective flag:
 
 ```typescript
-async function connectDemo(){
+async function stationWithTieredStorage(){
     let memphisConnection;
     try{
-        await memphis.station({
+        memphisConnection = await memphis.connect({...});
+        await memphisConnection.station({
             name: "myStation",
             tieredStorageEnabled: true
         });
@@ -297,10 +306,11 @@ async function connectDemo(){
 [Partitioning](https://docs.memphis.dev/memphis/memphis-broker/concepts/station#partitions) might be useful for a station. To have a station partitioned, simply change the partitions number:
 
 ```typescript
-async function connectDemo(){
+async function stationWithPartitions(){
     let memphisConnection;
     try{
-        await memphis.station({
+        memphisConnection = await memphis.connect({...});
+        await memphisConnection.station({
             name: "myStation",
             partitionsNumber: 3
         });
@@ -328,9 +338,10 @@ This function is deprecated. Use enforceSchema instead
 To add a schema to an already created station, enforceSchema can be used. Here is an example using enforceSchema to add a schema to a station:
 
 ```typescript
-async function connectDemo(){
+async function enforceSchema(){
     let memphisConnection;
     try{
+        memphisConnection = await memphis.connect({...});
         await memphis.enforceSchema({
             name: "mySchema",
             stationName: "myStation"
@@ -351,10 +362,11 @@ async detachSchema({ stationName }: { stationName: string }): Promise<void>
 To remove a schema from an already created station, detachSchema can be used. Here is an example of removing a schmea from a station:
 
 ```typescript
-async function connectDemo(){
+async function detachSchema(){
     let memphisConnection;
     try{
-        await memphis.detachSchema({
+        memphisConnection = await memphis.connect({...});
+        await memphisConnection.detachSchema({
             stationName: "myStation",
         });
     }catch(exception){
@@ -372,12 +384,11 @@ async close()
 To safely and correctly close down a Memphis connection use the close function. Here is an example of closing a Memphis connection.
 
 ```typescript
-async function connectDemo(){
+async function close(){
     let memphisConnection;
     try{
-
-
-        await memphis.close();
+        memphisConnection = await memphis.connect({...});
+        await memphisConnection.close();
     }catch(exception){
         // Handle exception
     }
@@ -400,10 +411,11 @@ async producer({
 Use the Memphis producer function to create a producer. Here is an example of creating a producer for a given station:
 
 ```typescript
-async function connectDemo(){
+async function producerBasic(){
     let memphisConnection;
     try{
-        await memphis.producer({
+        memphisConnection = await memphis.connect({...});
+        await memphisConnection.producer({
             stationName: "myStation",
             producerName: "myNewProducer"
         });
@@ -450,10 +462,11 @@ Use the Memphis consumer function to create a Consumer. It offeres some extra op
 Here is an example on how to create a consumer with all of the default options:
 
 ```typescript
-async function connectDemo(){
+async function consumerDefualt(){
     let memphisConnection;
     try{
-        await memphis.consumer({
+        memphisConnection = await memphis.connect({...});
+        await memphisConnection.consumer({
             stationName: "myStation",
             consumerName: "newConsumer"
         });
@@ -466,10 +479,11 @@ async function connectDemo(){
 To create a consumer in a consumer group, add the consumerGroup parameter:
 
 ```typescript
-async function connectDemo(){
+async function consumerGroup(){
     let memphisConnection;
     try{
-        await memphis.consumer({
+        memphisConnection = await memphis.connect({...});
+        await memphisConnection.consumer({
             stationName: "myStation",
             consumerName: "newConsumer",
             consumerGroup: "consumerGroup1"
@@ -483,10 +497,11 @@ async function connectDemo(){
 When using Consumer.consume, the consumer will continue to consume in an infinite loop. To change the rate at which the consumer polls, change the pullIntervalMs parameter:
 
 ```typescript
-async function connectDemo(){
+async function consumerPollInterval(){
     let memphisConnection;
     try{
-        await memphis.consumer({
+        memphisConnection = await memphis.connect({...});
+        await memphisConnection.consumer({
             stationName: "myStation",
             consumerName: "newConsumer",
             pullIntervalMs: 2000
@@ -502,10 +517,11 @@ Every time the consumer polls, the consumer will try to take batchSize number of
 Here is an example of a consumer that will try to poll 100 messages every 10 seconds while waiting up to 15 seconds for all messages to reach the consumer.
 
 ```typescript
-async function connectDemo(){
+async function consumerBatched(){
     let memphisConnection;
     try{
-        await memphis.consumer({
+        memphisConnection = await memphis.connect({...});
+        await memphisConnection.consumer({
             stationName: "myStation",
             consumerName: "newConsumer",
             pullIntervalMs: 10000,
@@ -521,10 +537,11 @@ async function connectDemo(){
 The maxMsgDeliveries parameter allows the user how many messages the consumer is able to consume before consuming more. 
 
 ```typescript
-async function connectDemo(){
+async function consumerMaxMessages(){
     let memphisConnection;
     try{
-        await memphis.consumer({
+        memphisConnection = await memphis.connect({...});
+        await memphisConnection.consumer({
             stationName: "myStation",
             consumerName: "newConsumer",
             pullIntervalMs: 10000,
@@ -570,10 +587,11 @@ The produce function allows for the user to produce a message without discretely
 Here is a minimal example of creating a producer:
 
 ```typescript
-async function connectDemo(){
+async function produceFromConnection(){
     let memphisConnection;
     try{
-        await memphis.produce({
+        memphisConnection = await memphis.connect({...});
+        await memphisConnection.produce({
             stationName: "myStation",
             producerName: "tempProducer",
             message: {some: "message"}
@@ -591,10 +609,11 @@ When producing many messages with a producer, asyncProduce may be used to help i
 Here is an example of a produce function call that waits up to 30 seconds for an acknowledgement from memphis and does so in an async manner:
 
 ```typescript
-async function connectDemo(){
+async function produceAsync(){
     let memphisConnection;
     try{
-        await memphis.produce({
+        memphisConnection = await memphis.connect({...});
+        await memphisConnection.produce({
             stationName: "myStation",
             producerName: "tempProducer",
             message: {some: "message"},
@@ -610,10 +629,11 @@ async function connectDemo(){
 As discussed before in the station section, idempotency is an important feature of memphis. To achieve idempotency, an id must be assigned to messages that are being produced. Use the msgId parameter for this purpose.
 
 ```typescript
-async function connectDemo(){
+async function produceWithIdempotency(){
     let memphisConnection;
     try{
-        await memphis.produce({
+        memphisConnection = await memphis.connect({...});
+        await memphisConnection.produce({
             stationName: "myStation",
             producerName: "tempProducer",
             message: {some: "message"},
@@ -625,19 +645,22 @@ async function connectDemo(){
 }
 ```
 
-To add message headers to the message, use the headers parameter. Headers can help with observability when using certain 3rd party to help monitor the behavior of memphis. See [here](https://docs.memphis.dev/memphis/memphis-broker/comparisons/aws-sqs-vs-memphis#observability) for more details.
+To add message headers to the message, use the headers function to create a headers object which you can add headers to. Headers can help with observability when using certain 3rd party to help monitor the behavior of memphis. See [here](https://docs.memphis.dev/memphis/memphis-broker/comparisons/aws-sqs-vs-memphis#observability) for more details.
 
 ```typescript
-async function connectDemo(){
+async function produceWithHeaders(){
     let memphisConnection;
     try{
-        await memphis.produce({
+        memphisConnection = await memphis.connect({...});
+
+        let headers = memphis.headers()
+        headers.add("trace_header_example", "track_me_123")
+
+        await memphisConnection.produce({
             stationName: "myStation",
             producerName: "tempProducer",
             message: {some: "message"},
-            headers: {
-                trace_header: "track_me_123"
-            }
+            headers: headers
         });
     }catch(exception){
         // Handle exception
@@ -648,10 +671,11 @@ async function connectDemo(){
 Lastly, memphis can produce to a specific partition in a station. To do so, use the producerPartitionKey parameter:
 
 ```typescript
-async function connectDemo(){
+async function produceWithPartition(){
     let memphisConnection;
     try{
-        await memphis.produce({
+        memphisConnection = await memphis.connect({...});
+        await memphisConnection.produce({
             stationName: "myStation",
             producerName: "tempProducer",
             message: {some: "message"},
@@ -698,10 +722,11 @@ Use the fetchMessages function in order to consume a batch of messages without h
 Because of the overlap of this method and Consumer.fetch and Consumer.consume, here is one example for fetching a batch of 5 messages, skipping the first 3 in the station:
 
 ```typescript
-async function connectDemo(){
+async function fetchMessages(){
     let memphisConnection;
     try{
-        await memphis.fetchMessages({
+        memphisConnection = await memphis.connect({...});
+        await memphisConnection.fetchMessages({
             stationName: "myStation",
             consumerName: "tempConsumer",
             batchSize: 5,
@@ -730,10 +755,11 @@ async createSchema({
 The createSchema method creates a schema. To use this function, simply name the schema, list its type and then give a file path to the schema file.
 
 ```typescript
-async function connectDemo(){
+async function createSchema(){
     let memphisConnection;
     try{
-        await memphis.createSchema({
+        memphisConnection = await memphis.connect({...});
+        await memphisConnection.createSchema({
             schemaName: "newSchema",
             schemaType: "json",
             schemaFilePath: "~/schemas/my_schema_path.json"

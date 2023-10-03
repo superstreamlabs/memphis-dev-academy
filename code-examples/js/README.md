@@ -1,6 +1,6 @@
 <div align="center">
   
-  ![Banner- Memphis dev streaming ](https://github.com/memphisdev/memphis.js/assets/70286779/e9899cdd-c78a-41d5-afb5-e5e053a540f0)
+  ![Banner- Memphis dev streaming ](https://github.com/memphisdev/memphis.js/assets/70286779/e9899about:blank#blockedcdd-c78a-41d5-afb5-e5e053a540f0)
 
   
 </div>
