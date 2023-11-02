@@ -1,6 +1,7 @@
 import asyncio
 import nats
 from nats.errors import ConnectionClosedError, TimeoutError, NoServersError
+import os
 
 async def main():
     connection_options = {
@@ -36,9 +37,31 @@ async def main():
     Here is an example of producing to the first partition of a station called
     nats-test. 
     """
-    await js.publish("nats-test$1.final", f"hello world".encode())
-
+    await js.publish("nats-test$1.final", "hello world".encode())
+    
     await nc.close()
+    """
+    To use memphis cloud with NATS, create a user and then when connecting
+    format the user field like this: <username>$memphis_account_id
+    The servers field here should be the <broker hostname>:6666.
+    """
+
+    cloud_connection_options = {
+        "servers": "aws-us-east-1.cloud.memphis.dev:6666",
+        "allow_reconnect": True,
+        "max_reconnect_attempts": 10,
+        "reconnect_time_wait": 3,
+        "connect_timeout": 15,
+        "user":f"nats_test${os.environ['memphis_account_id']}", # Optional in NATS. Mandatory in Memphis.
+        "password":f"{os.environ['memphis_pass']}" # Optional in NATS. Mandatory in Memphis.
+    }
+
+    cloud_nc = await nats.connect(**cloud_connection_options)
+    cloud_js = cloud_nc.jetstream()
+
+    await cloud_js.publish("nats-test$1.final", "hello world".encode())
+
+    await cloud_nc.close()
 
 if __name__ == '__main__':
     asyncio.run(main())
