@@ -26,7 +26,7 @@ tags:
   - tag: python
   - tag: awesome
 runtime: python3.11 # python3.8 | python3.9 | python3.10 | python3.11 
-dependencies: # ???
+dependencies: requirements.txt 
 environment_vars:
   - name: SomeEnvVariable
     value: SomeValue
@@ -44,7 +44,7 @@ tags:
   - tag: python
   - tag: awesome
 runtime: nodejs18.x # nodejs14.x | nodejs16.x | nodejs18.x | nodejs20.x
-dependencies: # ???
+dependencies: package.json
 environment_vars:
   - name: SomeEnvVariable
     value: SomeValue
