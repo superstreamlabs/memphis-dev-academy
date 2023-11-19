@@ -23,5 +23,5 @@ func EventHandler(message []byte, headers map[string]string, inputs map[string]s
 
 
 func main() {	
-	memphis.CreateFunction(RemoveFields)
+	memphis.CreateFunction(EventHandler)
 }

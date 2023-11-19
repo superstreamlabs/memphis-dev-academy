@@ -1,0 +1,12 @@
+function_name: python-example-function # has to be the same as the folder name
+description: This is a description
+tags: # these tags will appear on the Memphis UI
+  - tag: json
+  - tag: python3.11 # python3.8 | python3.9 | python3.10
+  - tag: awesome
+runtime: python
+inputs: # in case your function requires some input, here you can define the input fields that will be passed to the function
+  - name: function_input_1
+  - name: function_input_2
+handler: main.handler # the entry point to the function in the following pattern <file name>.<function name>
+dependencies: requirements.txt

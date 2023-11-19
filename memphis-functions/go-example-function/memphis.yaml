@@ -1,0 +1,10 @@
+function_name: go-example-function # has to be the same as the folder name
+description: This is a description
+tags: # these tags will appear on the Memphis UI
+  - tag: json
+  - tag: go
+  - tag: awesome
+runtime: go
+inputs: # in case your function requires some input, here you can define the input fields that will be passed to the function
+  - name: function_input_1
+  - name: function_input_2
