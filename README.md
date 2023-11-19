@@ -8,7 +8,8 @@ and an array of resources exclusively crafted for Memphis.dev.
 ## Table of Contents
 
 - [App examples](https://github.com/memphisdev/memphis-dev-academy/tree/master/code-examples)
-- [Memphis Functions](https://github.com/memphisdev/memphis-dev-academy/tree/master/memphis-functions)
+- [Memphis Functions](https://github.com/memphisdev/memphis-dev-functions/tree/master)
+- [Memphis Functions Code Templates](https://github.com/memphisdev/memphis-dev-academy/tree/master/memphis-functions)
 - [Integrations](https://github.com/memphisdev/memphis-dev-academy/tree/master/integrations/nats)
 - [Connectors](https://github.com/memphisdev/memphis-dev-academy/tree/master/connectors)
 - [Schemaverse](https://github.com/memphisdev/memphis-dev-academy/tree/master/schemaverse)
