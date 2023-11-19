@@ -1,4 +1,4 @@
-﻿using Memphis.Client;
+using Memphis.Client;
 using Memphis.Client.Consumer;
 using Memphis.Client.Producer;
 using Memphis.Client.Station;
