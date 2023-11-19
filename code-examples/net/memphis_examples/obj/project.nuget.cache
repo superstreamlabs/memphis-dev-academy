@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "8Kf8YeDsmzfpa6m14hwcqDJXj+W4/rgGcdM9dYZRvSH+gJXSMsd9KiKUIIwtm+3KMTwAs/Jyj2u7DviL1J9xLQ==",
+  "dgSpecHash": "0A23FIRoNEF/5mYtS62DAV/HwvqnmhxpdItIRlMlGxX+mnnBHzZoTg+gZOPxTR4hQPeXCAvfEcHPxdk/UBi3xg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\johng\\Workspaces\\memphis\\memphis-dev-academy\\code-examples\\net\\net.csproj",
+  "projectFilePath": "C:\\Users\\johng\\Workspaces\\memphis\\memphis-dev-academy\\code-examples\\net\\memphis_examples\\net.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\johng\\.nuget\\packages\\avroconvert\\3.3.6\\avroconvert.3.3.6.nupkg.sha512",
     "C:\\Users\\johng\\.nuget\\packages\\brotlisharplib\\0.3.3\\brotlisharplib.0.3.3.nupkg.sha512",
