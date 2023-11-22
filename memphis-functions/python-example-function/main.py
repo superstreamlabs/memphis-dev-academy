@@ -2,7 +2,7 @@ import json
 import base64
 from memphis.functions import create_function
 
-def handler(event, context): # The name of this function should match the handler field in the memphis.yaml file
+def handler(event, context): # The name of this file and this function should match the handler field in the memphis.yaml file in the following format <file name>.<function name>
     return create_function(event, event_handler = event_handler)
 
 def event_handler(msg_payload, msg_headers, inputs):

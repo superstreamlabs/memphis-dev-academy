@@ -1,5 +1,7 @@
-export const handler = async (event) => {
-    return await createFunction(event, eventHandler);
+const { memphis } = require("memphis-dev");
+
+export const handler = async (event) => { // The name of this file and this function should match the handler field in the memphis.yaml file in the following format <file name>.<function name>
+    return await memphis.createFunction(event, eventHandler);
 };
 
 /**

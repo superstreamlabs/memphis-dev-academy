@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "memphis-dev-beta": "latest"
+    "memphis-dev": "latest"
   }
 }
