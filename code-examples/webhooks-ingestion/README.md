@@ -112,5 +112,12 @@ Schema error example:
 ```json
 {"error":"Schema validation has failed: jsonschema: '' does not validate with file:///Users/user/memphisdev/memphis-rest-gateway/123#/required: missing properties: 'field1', 'field2', 'field3'","success":false}
 ```
+<hr>
 
-### Example with Stripe
+### Example with Stripe (Similar to most systems support webhooks)
+**Step 1: Create a new webhook (https://dashboard.stripe.com/webhooks/create)**<br>
+![Screenshot 2023-12-10 at 16 04 59](https://github.com/memphisdev/memphis-dev-academy/assets/70286779/31063aac-6ce4-402b-b5e5-60cd9b7b24e9)<br>
+**Step 2: After you generate a JWT token, paste the Memphis webhook URL in the Stripe's Endpoint URL input**<br>
+```
+https://aws-eu-central-1.restgw.cloud.memphis.dev/stations/stripe-notifications/produce/single?authorization=eyJhbGciO*******************N0MyJ9.qLM3c-********3Uo0
+```
