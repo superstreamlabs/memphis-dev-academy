@@ -11,14 +11,15 @@ type Event struct {
 }
 
 // https://github.com/memphisdev/memphis.go#creating-a-memphis-function
-func EventHandler(message []byte, headers map[string]string, inputs map[string]string) ([]byte, map[string]string,  error){
+func EventHandler(message any, headers map[string]string, inputs map[string]string) (any, map[string]string,  error){
 	// Here is a short example of converting the message payload to bytes and back
-	var event Event
-	json.Unmarshal(message, &event)
+	as_bytes = message.([]byte)
 	
-	// Return the payload back as []bytes
-	eventBytes, _ := json.Marshal(event)
-	return eventBytes, headers, nil
+	var event Event
+	json.Unmarshal(as_bytes, &event)
+	
+	// Return the payload back 
+	return event, headers, nil
 }
 
 
