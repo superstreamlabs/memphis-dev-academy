@@ -6,7 +6,7 @@ package-lock.json
 /build
 node_modules/
 
-*/obj/Debug/*
+**/obj/Debug/*
 # Compiled class file
 *.class
 
