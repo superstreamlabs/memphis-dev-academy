@@ -1,3 +1,7 @@
+<p align="center">
+Please pay attention that Memphis.dev is no longer supported officially by the Superstream team (formerly Memphis.dev) and was released to the public.
+<p align="center">
+  
 ![memphis academy github banner](https://github.com/memphisdev/memphis-dev-academy/assets/70286779/7836f50f-69f8-4b07-84ec-3a59f5958f85)
 
 <p align="center">
@@ -17,7 +21,7 @@
 
   <h4>
 
-**[Memphis.dev](https://memphis.dev)** Is The First Data Streaming Platform Designed For Backend Developers<br>
+**Memphis.dev** Is The First Data Streaming Platform Designed For Backend Developers<br>
 To Build Event-driven And Real-time Features Faster Than Ever.<br>
   
 </div>
